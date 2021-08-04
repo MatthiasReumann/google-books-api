@@ -2,11 +2,12 @@ val ktorVersion: String = "1.6.2"
 
 plugins {
     kotlin("jvm").version("1.5.21")
-
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
+    `maven-publish`
 }
 
+group = "com.github.matthiasreumann"
 version = "0.1.0"
 
 repositories {
