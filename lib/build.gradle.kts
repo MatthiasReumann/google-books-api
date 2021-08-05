@@ -2,9 +2,8 @@ val ktorVersion: String = "1.6.2"
 
 plugins {
     kotlin("jvm").version("1.5.21")
-    // Apply the java-library plugin for API and implementation separation.
-    `java-library`
     `maven-publish`
+    `java-library`
 }
 
 group = "com.github.matthiasreumann"
@@ -27,4 +26,15 @@ dependencies {
     implementation("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
     implementation("io.ktor:ktor-client-gson:$ktorVersion")
+}
+
+tasks {
+    val sourcesJar by creating(Jar::class) {
+        archiveClassifier.set("sources")
+        from(sourceSets.main.get().allSource)
+    }
+
+    artifacts {
+        archives(sourcesJar)
+    }
 }
