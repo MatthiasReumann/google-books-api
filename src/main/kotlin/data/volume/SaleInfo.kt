@@ -1,4 +1,4 @@
-package googlebooksapi.data.volume
+package data.volume
 
 data class SaleInfo(
     val country: String,

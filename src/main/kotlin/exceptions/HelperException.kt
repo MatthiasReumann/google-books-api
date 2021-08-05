@@ -1,4 +1,4 @@
-package googlebooksapi.exceptions
+package exceptions
 
 import java.lang.Exception
 

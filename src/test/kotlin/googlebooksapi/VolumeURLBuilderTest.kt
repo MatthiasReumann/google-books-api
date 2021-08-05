@@ -1,8 +1,8 @@
 package googlebookapiwrapper
 
-import googlebooksapi.PrintTypeOption
-import googlebooksapi.VolumeSearch
-import googlebooksapi.VolumeURLBuilder
+import PrintTypeOption
+import VolumeSearch
+import VolumeURLBuilder
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

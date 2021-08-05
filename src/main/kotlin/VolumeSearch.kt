@@ -1,5 +1,3 @@
-package googlebooksapi
-
 import java.lang.StringBuilder
 
 class VolumeSearch(
