@@ -24,6 +24,14 @@ dependencies {
 
 java {
     withSourcesJar()
+    withJavadocJar()
+}
+
+tasks.jar {
+    manifest {
+        attributes(mapOf("Implementation-Title" to "googlebooksapi",
+            "Implementation-Version" to "0.1.0"))
+    }
 }
 
 publishing {
