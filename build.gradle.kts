@@ -1,7 +1,7 @@
 val ktorVersion: String = "1.6.2"
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.5.21"
+    id("org.jetbrains.kotlin.jvm") version "1.5.30-M1"
     `maven-publish`
     `java-library`
 }
@@ -10,11 +10,14 @@ group = "com.github.MatthiasReumann"
 version = "0.1.0"
 
 repositories {
-    // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
 
 dependencies {
+    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
+
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
     testImplementation(kotlin("test"))
 
     implementation("io.ktor:ktor-client-core:$ktorVersion")
@@ -38,13 +41,6 @@ tasks {
         archives(sourcesJar)
         archives(javadocJar)
         archives(jar)
-    }
-}
-
-tasks.jar {
-    manifest {
-        attributes(mapOf("Implementation-Title" to "googlebooksapi",
-            "Implementation-Version" to "0.1.0"))
     }
 }
 
