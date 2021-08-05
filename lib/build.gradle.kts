@@ -36,5 +36,6 @@ tasks {
 
     artifacts {
         archives(sourcesJar)
+        archives(jar)
     }
 }
