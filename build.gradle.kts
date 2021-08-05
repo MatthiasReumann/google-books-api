@@ -22,15 +22,8 @@ dependencies {
     implementation("io.ktor:ktor-client-gson:$ktorVersion")
 }
 
-tasks {
-    val sourcesJar by creating(Jar::class) {
-        archiveClassifier.set("sources")
-        from(sourceSets.main.get().allSource)
-    }
-
-    artifacts {
-        archives(sourcesJar)
-    }
+java {
+    withSourcesJar()
 }
 
 publishing {
