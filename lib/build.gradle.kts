@@ -39,3 +39,15 @@ tasks {
         archives(jar)
     }
 }
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            pom {
+                name.set("googlebooksapi")
+                description.set("A Kotlin Wrapper of the Google Books APIs")
+                url.set("https://github.com/MatthiasReumann/googlebooksapi")
+            }
+        }
+    }
+}
