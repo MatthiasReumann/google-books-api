@@ -26,28 +26,30 @@ dependencies {
 }
 
 tasks {
-    val sourcesJar by creating(Jar::class) {
-        archiveClassifier.set("sources")
-        from(sourceSets.main.get().allSource)
+    compileKotlin {
+        kotlinOptions.jvmTarget = "1.8"
     }
-
-    val javadocJar by creating(Jar::class) {
-        dependsOn.add(javadoc)
-        archiveClassifier.set("javadoc")
-        from(javadoc)
-    }
-
-    artifacts {
-        archives(sourcesJar)
-        archives(javadocJar)
-        archives(jar)
+    compileTestKotlin {
+        kotlinOptions.jvmTarget = "1.8"
     }
 }
 
+
+val sourcesJar by tasks.creating(Jar::class) {
+    archiveClassifier.set("sources")
+    from(sourceSets.main.get().allSource)
+}
+
+
 publishing {
     publications {
-        create<MavenPublication>("maven") {
+        create<MavenPublication>("googlebooksapi") {
+            artifacts {
+                archives(sourcesJar)
+                //archives(jar)
+            }
             pom {
+                packaging = "jar"
                 name.set("googlebooksapi")
                 description.set("A Kotlin Wrapper of the Google Books APIs")
                 url.set("https://github.com/MatthiasReumann/googlebooksapi")
