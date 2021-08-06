@@ -1,9 +1,9 @@
 val ktorVersion: String = "1.6.2"
 
 plugins {
+    java
     id("org.jetbrains.kotlin.jvm") version "1.5.30-M1"
     `maven-publish`
-    `java-library`
 }
 
 group = "com.github.MatthiasReumann"
