@@ -1,4 +1,4 @@
-package data.volume
+package googlebooksapi.data.volume
 
 data class ReadingMode(
     val text: Boolean,

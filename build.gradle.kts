@@ -14,9 +14,7 @@ repositories {
 }
 
 dependencies {
-    implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
-
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation(kotlin("stdlib-jdk8"))
 
     testImplementation(kotlin("test"))
 
@@ -46,7 +44,6 @@ publishing {
         create<MavenPublication>("googlebooksapi") {
             artifacts {
                 archives(sourcesJar)
-                //archives(jar)
             }
             pom {
                 packaging = "jar"

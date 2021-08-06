@@ -1,5 +1,7 @@
-import data.volume.Volume
-import exceptions.HelperException
+package googlebooksapi
+
+import googlebooksapi.data.volume.Volume
+import googlebooksapi.exceptions.HelperException
 import io.ktor.client.features.*
 
 class VolumeHelper(apikey: String) {

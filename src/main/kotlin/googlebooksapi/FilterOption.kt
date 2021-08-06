@@ -1,3 +1,5 @@
+package googlebooksapi
+
 enum class FilterOption(val string: String){
     PARTIAL("partial"),
     FULL("full"),

@@ -1,4 +1,6 @@
-import data.volume.Volume
+package googlebooksapi
+
+import googlebooksapi.data.volume.Volume
 import io.ktor.client.*
 import io.ktor.client.features.json.*
 
