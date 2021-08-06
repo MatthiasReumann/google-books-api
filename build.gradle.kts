@@ -38,3 +38,15 @@ tasks{
         archives(jar)
     }
 }
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "org.github.matthiasreumann"
+            artifactId = "googlebooksapi"
+            version = "0.0.1"
+
+            from(components["java"])
+        }
+    }
+}
