@@ -1,5 +1,5 @@
 # googlebooksapi
-A Kotlin Wrapper of the Google Books APIs
+A Kotlin Wrapper of the [Google Books APIs](https://developers.google.com/books)
 
 # Install
 
@@ -48,6 +48,3 @@ suspend fun main() {
   }
   val volume = volumeHelper.get()
 }
-
-
-
