@@ -10,8 +10,8 @@ data class BookshelfItem(
     val title: String,
     val description: String,
     val access: String,
-    val updated: Instant,
-    val created: Instant,
+    val updated: String,
+    val created: String,
     val volumeCount: Int,
-    val volumesLastUpdated: Instant
+    val volumesLastUpdated: String
 )
