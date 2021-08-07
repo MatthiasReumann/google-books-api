@@ -1,5 +1,6 @@
 package googlebooksapi
 
+import googlebooksapi.options.PrintTypeOption
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

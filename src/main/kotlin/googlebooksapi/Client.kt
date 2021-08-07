@@ -16,6 +16,4 @@ abstract class Client {
     fun close(){
         httpClient.close()
     }
-
-    abstract suspend fun get(url: String): Volume
 }

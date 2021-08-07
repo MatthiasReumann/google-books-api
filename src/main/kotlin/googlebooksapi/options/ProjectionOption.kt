@@ -1,4 +1,4 @@
-package googlebooksapi
+package googlebooksapi.options
 
 enum class ProjectionOption(val string: String) {
     FULL("full"),
