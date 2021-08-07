@@ -2,6 +2,10 @@ package googlebooksapi
 
 import googlebooksapi.data.volume.Volume
 import googlebooksapi.exceptions.HelperException
+import googlebooksapi.options.FilterOption
+import googlebooksapi.options.PrintTypeOption
+import googlebooksapi.options.ProjectionOption
+import googlebooksapi.options.SortOption
 import io.ktor.client.features.*
 
 class VolumeHelper(apikey: String) {
