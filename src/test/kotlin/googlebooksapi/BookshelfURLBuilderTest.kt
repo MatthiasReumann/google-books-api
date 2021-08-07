@@ -16,22 +16,30 @@ internal class BookshelfURLBuilderTest {
     @Test(InvalidUserIdException::class)
     fun testGetURLEmptyUserID() {
         val urlBuilder = BookshelfURLBuilder(KEY)
-        urlBuilder.getURL(userID = EMPTY_STRING)
+        urlBuilder.getBookshelves(userID = EMPTY_STRING)
     }
 
     @Test
-    fun testGetURLValid() {
+    fun testGetBookshelves() {
         val urlBuilder = BookshelfURLBuilder(KEY)
-        val actual = urlBuilder.getURL(userID = USERID)
+        val actual = urlBuilder.getBookshelves(userID = USERID)
         val expected = "https://www.googleapis.com/books/v1/users/$USERID/bookshelves?key=$KEY"
         assertEquals(expected, actual)
     }
 
     @Test
-    fun testGetURLByBookshelfID(){
+    fun testGetSpecificBookshelf(){
         val urlBuilder = BookshelfURLBuilder(KEY)
-        val actual = urlBuilder.getURLByBookshelfID(USERID, BOOKSHELFID)
+        val actual = urlBuilder.getSpecificBookshelf(USERID, BOOKSHELFID)
         val expected = "https://www.googleapis.com/books/v1/users/$USERID/bookshelves/$BOOKSHELFID?key=$KEY"
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun testGetVolumesInBookshelf(){
+        val urlBuilder = BookshelfURLBuilder(KEY)
+        val actual = urlBuilder.getVolumesInBookshelf(USERID, BOOKSHELFID)
+        val expected = "https://www.googleapis.com/books/v1/users/$USERID/bookshelves/$BOOKSHELFID/volumes?key=$KEY"
         assertEquals(expected, actual)
     }
 }

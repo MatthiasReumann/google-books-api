@@ -1,7 +1,10 @@
 package googlebooksapi
 
+import googlebooksapi.data.volume.Item
 import googlebooksapi.data.volume.Volume
-import googlebooksapi.exceptions.HelperException
+import googlebooksapi.exceptions.HelperClientException
+import googlebooksapi.exceptions.HelperRedirectException
+import googlebooksapi.exceptions.HelperServerException
 import googlebooksapi.options.FilterOption
 import googlebooksapi.options.PrintTypeOption
 import googlebooksapi.options.ProjectionOption
@@ -83,38 +86,50 @@ class VolumeHelper(apikey: String) {
 
     suspend fun get(): Volume {
         val search = VolumeSearch(searchText, fields, parameters)
-        val url = urlBuilder.getURL(search)
+        val url = urlBuilder.getVolumes(search)
         val client = VolumeClient()
         val volume: Volume
         try {
             volume = client.get(url)
         } catch (redirectException: RedirectResponseException) {
-            throw HelperException(redirectException.message ?: "3xx received")
+            val message = redirectException.message ?: "300 Error"
+            val code = redirectException.response.status
+            throw HelperRedirectException(code, message)
         } catch (clientException: ClientRequestException) {
-            throw HelperException(clientException.message)
+            val message = clientException.message
+            val code = clientException.response.status
+            throw HelperClientException(code, message)
         } catch (serverException: ServerResponseException) {
-            throw HelperException(serverException.message ?: "5xx received")
+            val message = serverException.message ?: "500 Error"
+            val code = serverException.response.status
+            throw HelperServerException(code, message)
         } finally {
             client.close()
         }
         return volume
     }
 
-    suspend fun getById(volumeId: String): Volume {
-        val url = urlBuilder.getByIdURL(volumeId)
+    suspend fun getSpecific(volumeId: String): Item {
+        val url = urlBuilder.getSpecificVolume(volumeId)
         val client = VolumeClient()
-        val volume: Volume
+        val item: Item
         try {
-            volume = client.get(url)
+            item = client.getSpecific(url)
         } catch (redirectException: RedirectResponseException) {
-            throw HelperException(redirectException.message ?: "3xx received")
+            val message = redirectException.message ?: "300 Error"
+            val code = redirectException.response.status
+            throw HelperRedirectException(code, message)
         } catch (clientException: ClientRequestException) {
-            throw HelperException(clientException.message)
+            val message = clientException.message
+            val code = clientException.response.status
+            throw HelperClientException(code, message)
         } catch (serverException: ServerResponseException) {
-            throw HelperException(serverException.message ?: "5xx received")
+            val message = serverException.message ?: "500 Error"
+            val code = serverException.response.status
+            throw HelperServerException(code, message)
         } finally {
             client.close()
         }
-        return volume
+        return item
     }
 }
