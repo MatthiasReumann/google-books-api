@@ -8,12 +8,17 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 
 class BookshelfClient : Client() {
-    suspend fun getAll(url: String): Bookshelf {
+    suspend fun get(url: String): Bookshelf {
         val response: HttpResponse = httpClient.get(url) {}
         return response.receive()
     }
 
-    suspend fun get(url: String): BookshelfItem {
+    suspend fun getSpecific(url: String): BookshelfItem {
+        val response: HttpResponse = httpClient.get(url) {}
+        return response.receive()
+    }
+
+    suspend fun getVolumesInBookshelf(url: String): Volume {
         val response: HttpResponse = httpClient.get(url) {}
         return response.receive()
     }

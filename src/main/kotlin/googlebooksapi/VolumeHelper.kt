@@ -1,7 +1,10 @@
 package googlebooksapi
 
 import googlebooksapi.data.volume.Volume
+import googlebooksapi.exceptions.HelperClientException
 import googlebooksapi.exceptions.HelperException
+import googlebooksapi.exceptions.HelperRedirectException
+import googlebooksapi.exceptions.HelperServerException
 import googlebooksapi.options.FilterOption
 import googlebooksapi.options.PrintTypeOption
 import googlebooksapi.options.ProjectionOption
@@ -89,11 +92,17 @@ class VolumeHelper(apikey: String) {
         try {
             volume = client.get(url)
         } catch (redirectException: RedirectResponseException) {
-            throw HelperException(redirectException.message ?: "3xx received")
+            val message = redirectException.message ?: "300 Error"
+            val code = redirectException.response.status
+            throw HelperRedirectException(code, message)
         } catch (clientException: ClientRequestException) {
-            throw HelperException(clientException.message)
+            val message = clientException.message
+            val code = clientException.response.status
+            throw HelperClientException(code, message)
         } catch (serverException: ServerResponseException) {
-            throw HelperException(serverException.message ?: "5xx received")
+            val message = serverException.message ?: "500 Error"
+            val code = serverException.response.status
+            throw HelperServerException(code, message)
         } finally {
             client.close()
         }
@@ -107,11 +116,17 @@ class VolumeHelper(apikey: String) {
         try {
             volume = client.get(url)
         } catch (redirectException: RedirectResponseException) {
-            throw HelperException(redirectException.message ?: "3xx received")
+            val message = redirectException.message ?: "300 Error"
+            val code = redirectException.response.status
+            throw HelperRedirectException(code, message)
         } catch (clientException: ClientRequestException) {
-            throw HelperException(clientException.message)
+            val message = clientException.message
+            val code = clientException.response.status
+            throw HelperClientException(code, message)
         } catch (serverException: ServerResponseException) {
-            throw HelperException(serverException.message ?: "5xx received")
+            val message = serverException.message ?: "500 Error"
+            val code = serverException.response.status
+            throw HelperServerException(code, message)
         } finally {
             client.close()
         }
