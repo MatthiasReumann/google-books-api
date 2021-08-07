@@ -2,7 +2,6 @@ package googlebooksapi
 
 import googlebooksapi.data.volume.Volume
 import googlebooksapi.exceptions.HelperClientException
-import googlebooksapi.exceptions.HelperException
 import googlebooksapi.exceptions.HelperRedirectException
 import googlebooksapi.exceptions.HelperServerException
 import googlebooksapi.options.FilterOption
@@ -86,7 +85,7 @@ class VolumeHelper(apikey: String) {
 
     suspend fun get(): Volume {
         val search = VolumeSearch(searchText, fields, parameters)
-        val url = urlBuilder.getURL(search)
+        val url = urlBuilder.getVolumes(search)
         val client = VolumeClient()
         val volume: Volume
         try {
@@ -109,8 +108,8 @@ class VolumeHelper(apikey: String) {
         return volume
     }
 
-    suspend fun getById(volumeId: String): Volume {
-        val url = urlBuilder.getByIdURL(volumeId)
+    suspend fun getSpecific(volumeId: String): Volume {
+        val url = urlBuilder.getSpecificVolume(volumeId)
         val client = VolumeClient()
         val volume: Volume
         try {

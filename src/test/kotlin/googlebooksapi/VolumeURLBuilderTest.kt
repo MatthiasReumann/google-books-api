@@ -26,44 +26,52 @@ internal class VolumeURLBuilderTest {
     private val volumeRequestBuilder = VolumeURLBuilder(APIKEY)
 
     @Test
-    fun testGetURLEmptySearch() {
+    fun testGetVolumesEmptySearch() {
         val search = VolumeSearch(EMPTY_STRING, EMPTY_MAP, EMPTY_MAP)
-        val actual = volumeRequestBuilder.getURL(search)
+        val actual = volumeRequestBuilder.getVolumes(search)
         val expected = "https://www.googleapis.com/books/v1/volumes?q=&key=$APIKEY"
         assertEquals(expected, actual)
     }
 
     @Test
-    fun testGetURLWithSearchTextOnly() {
+    fun testGetVolumesWithSearchTextOnly() {
         val search = VolumeSearch(SEARCHTEXT, EMPTY_MAP, EMPTY_MAP)
-        val actual = volumeRequestBuilder.getURL(search)
+        val actual = volumeRequestBuilder.getVolumes(search)
         val expected = "https://www.googleapis.com/books/v1/volumes?q=$SEARCHTEXT&key=$APIKEY"
         assertEquals(expected, actual)
     }
 
     @Test
-    fun testGetURLWithField() {
+    fun testGetVolumesWithField() {
         val search = VolumeSearch(SEARCHTEXT, SINGLE_FIELD, EMPTY_MAP)
-        val actual = volumeRequestBuilder.getURL(search)
+        val actual = volumeRequestBuilder.getVolumes(search)
         val expected = "https://www.googleapis.com/books/v1/volumes?q=$SEARCHTEXT+isbn:$ISBN&key=$APIKEY"
         assertEquals(expected, actual)
     }
 
     @Test
-    fun testGetURLWithFields() {
+    fun testGetVolumesWithFields() {
         val search = VolumeSearch(SEARCHTEXT, FIELDS, EMPTY_MAP)
-        val actual = volumeRequestBuilder.getURL(search)
+        val actual = volumeRequestBuilder.getVolumes(search)
         val expected =
             "https://www.googleapis.com/books/v1/volumes?q=$SEARCHTEXT+isbn:$ISBN+inauthor:$AUTHOR&key=$APIKEY"
         assertEquals(expected, actual)
     }
 
     @Test
-    fun testGetURLWithParameters() {
+    fun testGetVolumesWithParameters() {
         val search = VolumeSearch(SEARCHTEXT, EMPTY_MAP, PARAMETERS)
-        val actual = volumeRequestBuilder.getURL(search)
+        val actual = volumeRequestBuilder.getVolumes(search)
         val expected =
             "https://www.googleapis.com/books/v1/volumes?q=$SEARCHTEXT&download=$DOWNLOAD&printType=$PRINTTYPE&key=$APIKEY"
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun testGetSpecificVolume() {
+        val actual = volumeRequestBuilder.getSpecificVolume("ID")
+        val expected =
+            "https://www.googleapis.com/books/v1/volumes/ID?key=$APIKEY"
         assertEquals(expected, actual)
     }
 }
