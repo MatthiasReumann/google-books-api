@@ -1,5 +1,6 @@
 package googlebooksapi
 
+import googlebooksapi.data.volume.Item
 import googlebooksapi.data.volume.Volume
 import googlebooksapi.exceptions.HelperClientException
 import googlebooksapi.exceptions.HelperRedirectException
@@ -108,12 +109,12 @@ class VolumeHelper(apikey: String) {
         return volume
     }
 
-    suspend fun getSpecific(volumeId: String): Volume {
+    suspend fun getSpecific(volumeId: String): Item {
         val url = urlBuilder.getSpecificVolume(volumeId)
         val client = VolumeClient()
-        val volume: Volume
+        val item: Item
         try {
-            volume = client.get(url)
+            item = client.getSpecific(url)
         } catch (redirectException: RedirectResponseException) {
             val message = redirectException.message ?: "300 Error"
             val code = redirectException.response.status
@@ -129,6 +130,6 @@ class VolumeHelper(apikey: String) {
         } finally {
             client.close()
         }
-        return volume
+        return item
     }
 }

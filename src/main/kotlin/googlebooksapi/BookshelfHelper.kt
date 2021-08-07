@@ -52,8 +52,8 @@ class BookshelfHelper(apikey: String) {
         return bookshelf
     }
 
-    suspend fun getSpecific(bookshelfID: String): BookshelfItem {
-        val url = urlBuilder.getSpecificBookshelf(userID, bookshelfID)
+    suspend fun getSpecific(bookshelfID: Int): BookshelfItem {
+        val url = urlBuilder.getSpecificBookshelf(userID, bookshelfID.toString())
         val client = BookshelfClient()
         val item: BookshelfItem
 
@@ -78,8 +78,8 @@ class BookshelfHelper(apikey: String) {
         return item
     }
 
-    suspend fun getVolumesInBookshelf(bookshelfID: String): Volume {
-        val url = urlBuilder.getVolumesInBookshelf(userID, bookshelfID)
+    suspend fun getVolumesInBookshelf(bookshelfID: Int): Volume {
+        val url = urlBuilder.getVolumesInBookshelf(userID, bookshelfID.toString())
         val client = BookshelfClient()
         val volumes: Volume
 
