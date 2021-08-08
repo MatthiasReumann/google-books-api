@@ -1,7 +1,6 @@
-package googlebooksapi.data.bookshelf
+package googlebooksapi.model.bookshelf
 
 import java.net.URI
-import java.time.Instant
 
 data class BookshelfItem(
     val kind: String,

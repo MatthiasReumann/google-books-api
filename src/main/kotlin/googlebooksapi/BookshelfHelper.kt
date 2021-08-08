@@ -1,105 +1,36 @@
 package googlebooksapi
 
-import googlebooksapi.data.bookshelf.Bookshelf
-import googlebooksapi.data.bookshelf.BookshelfItem
-import googlebooksapi.data.volume.Volume
-import googlebooksapi.exceptions.HelperClientException
-import googlebooksapi.exceptions.HelperException
-import googlebooksapi.exceptions.HelperRedirectException
-import googlebooksapi.exceptions.HelperServerException
-import googlebooksapi.options.FilterOption
-import googlebooksapi.options.PrintTypeOption
-import googlebooksapi.options.ProjectionOption
-import googlebooksapi.options.SortOption
-import io.ktor.client.features.*
+import googlebooksapi.model.bookshelf.Bookshelf
+import googlebooksapi.model.bookshelf.BookshelfItem
+import googlebooksapi.model.volume.Volume
 
 class BookshelfHelper(apikey: String) {
     private val urlBuilder: BookshelfURLBuilder
-    private var userID: String
 
     init {
         urlBuilder = BookshelfURLBuilder(apikey)
-        userID = StringUtils.EMPTY_STRING
     }
 
-    fun userID(id: String) {
-        userID = id
-    }
-
-    suspend fun get(): Bookshelf {
+    suspend fun get(userID: String): Bookshelf {
         val url = urlBuilder.getBookshelves(userID)
         val client = BookshelfClient()
-        val bookshelf: Bookshelf
-
-        try {
-            bookshelf = client.get(url)
-        } catch (redirectException: RedirectResponseException) {
-            val message = redirectException.message ?: "300 Error"
-            val code = redirectException.response.status
-            throw HelperRedirectException(code, message)
-        } catch (clientException: ClientRequestException) {
-            val message = clientException.message
-            val code = clientException.response.status
-            throw HelperClientException(code, message)
-        } catch (serverException: ServerResponseException) {
-            val message = serverException.message ?: "500 Error"
-            val code = serverException.response.status
-            throw HelperServerException(code, message)
-        } finally {
-            client.close()
-        }
+        val bookshelf: Bookshelf = client.getBookshelves(url)
 
         return bookshelf
     }
 
-    suspend fun getSpecific(bookshelfID: Int): BookshelfItem {
-        val url = urlBuilder.getSpecificBookshelf(userID, bookshelfID.toString())
+    suspend fun getBookshelfWithID(userID: String, bookshelfID: Int): BookshelfItem {
+        val url = urlBuilder.getBookshelfWithID(userID, bookshelfID.toString())
         val client = BookshelfClient()
-        val item: BookshelfItem
-
-        try {
-            item = client.getSpecific(url)
-        } catch (redirectException: RedirectResponseException) {
-            val message = redirectException.message ?: "300 Error"
-            val code = redirectException.response.status
-            throw HelperRedirectException(code, message)
-        } catch (clientException: ClientRequestException) {
-            val message = clientException.message
-            val code = clientException.response.status
-            throw HelperClientException(code, message)
-        } catch (serverException: ServerResponseException) {
-            val message = serverException.message ?: "500 Error"
-            val code = serverException.response.status
-            throw HelperServerException(code, message)
-        } finally {
-            client.close()
-        }
+        val item: BookshelfItem = client.getBookshelfItem(url)
 
         return item
     }
 
-    suspend fun getVolumesInBookshelf(bookshelfID: Int): Volume {
+    suspend fun getVolumesInBookshelf(userID: String, bookshelfID: Int): Volume {
         val url = urlBuilder.getVolumesInBookshelf(userID, bookshelfID.toString())
         val client = BookshelfClient()
-        val volumes: Volume
-
-        try {
-            volumes = client.getVolumesInBookshelf(url)
-        } catch (redirectException: RedirectResponseException) {
-            val message = redirectException.message ?: "300 Error"
-            val code = redirectException.response.status
-            throw HelperRedirectException(code, message)
-        } catch (clientException: ClientRequestException) {
-            val message = clientException.message
-            val code = clientException.response.status
-            throw HelperClientException(code, message)
-        } catch (serverException: ServerResponseException) {
-            val message = serverException.message ?: "500 Error"
-            val code = serverException.response.status
-            throw HelperServerException(code, message)
-        } finally {
-            client.close()
-        }
+        val volumes: Volume = client.getVolumesInBookshelf(url)
 
         return volumes
     }

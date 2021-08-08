@@ -1,8 +1,8 @@
-package googlebooksapi.data.volume
+package googlebooksapi.model.volume
 
 import java.net.URI
 
-data class Item(
+data class VolumeItem(
     val kind: String,
     val id: String,
     val etag: String,

@@ -1,6 +1,6 @@
 package googlebooksapi
 
-import googlebooksapi.exceptions.InvalidUserIdException
+import googlebooksapi.exception.InvalidUserIdException
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -30,7 +30,7 @@ internal class BookshelfURLBuilderTest {
     @Test
     fun testGetSpecificBookshelf(){
         val urlBuilder = BookshelfURLBuilder(KEY)
-        val actual = urlBuilder.getSpecificBookshelf(USERID, BOOKSHELFID)
+        val actual = urlBuilder.getBookshelfWithID(USERID, BOOKSHELFID)
         val expected = "https://www.googleapis.com/books/v1/users/$USERID/bookshelves/$BOOKSHELFID?key=$KEY"
         assertEquals(expected, actual)
     }

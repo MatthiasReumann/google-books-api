@@ -1,4 +1,4 @@
-package googlebooksapi
+package googlebooksapi.util
 
 class StringUtils {
     companion object{
