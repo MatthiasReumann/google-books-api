@@ -1,42 +1,13 @@
 # googlebooksapi
-A Kotlin Wrapper of the [Google Books APIs](https://developers.google.com/books)
+A wrapper of the [Google Books APIs](https://developers.google.com/books) written in Kotlin
 
-# Install
+## Usage
 
-## Groovy
-```
-allprojects {
-  repositories {
-      maven { url "https://jitpack.io" }
-  }
-}
+### Volumes
 
-dependencies {
-   implementation 'com.github.MatthiasReumann:googlebooksapi:master-SNAPSHOT'
-}
-```
+#### Get volumes
 
-## Kotlin DSL
-
-```
-allprojects {
-  repositories {
-    maven { url = uri("https://www.jitpack.io") }
-  }
-}
-
-dependencies {
-   implementation("com.github.MatthiasReumann:googlebooksapi:master-SNAPSHOT")
-}
-```
-
-# Usage
-
-## Volumes
-
-### Get volumes
-
-```
+``` kotlin
 val volumeHelper = VolumeHelper("API_KEY")
 volumeHelper.apply {
     inauthor("Michael Pollan")
@@ -50,39 +21,68 @@ volumeHelper.apply {
 val volume = volumeHelper.get()
 ```
 
-### Get specific volume
+#### Get specific volume
 
-```
+``` kotlin
 val volumeHelper = VolumeHelper("API_KEY")
 val volume = volumeHelper.getSpecific("wVyWswEACAAJ")
 ```
 
-## Bookshelves
+### Bookshelves
 
-### Get bookshelves
+#### Get bookshelves
 
-```
+``` kotlin
 val bookshelfHelper = BookshelfHelper("API_KEY")
 bookshelfHelper.userID("1164450273332089480971")
 
 val bookshelves = bookshelfHelper.get()
 ```
 
-### Get specific bookshelf
+#### Get specific bookshelf
 
-```
+```kotlin
 val bookshelfHelper = BookshelfHelper("API_KEY")
 bookshelfHelper.userID("1164450273332089480971")
 
 val bookshelf = bookshelfHelper.getSpecific(3)
 ```
 
-### Get volumes in bookshelf
+#### Get volumes in bookshelf
 
-```
+```kotlin
 val bookshelfHelper = BookshelfHelper("API_KEY")
 bookshelfHelper.userID("1164450273332089480971")
 
 val volumes = bookshelfHelper.getVolumesInBookshelf(3)
+```
+
+## Install
+
+### Groovy
+```gradle
+allprojects {
+  repositories {
+      maven { url "https://jitpack.io" }
+  }
+}
+
+dependencies {
+   implementation 'com.github.MatthiasReumann:googlebooksapi:master-SNAPSHOT'
+}
+```
+
+### Kotlin DSL
+
+``` gradle
+allprojects {
+  repositories {
+    maven { url = uri("https://www.jitpack.io") }
+  }
+}
+
+dependencies {
+   implementation("com.github.MatthiasReumann:googlebooksapi:master-SNAPSHOT")
+}
 ```
 
