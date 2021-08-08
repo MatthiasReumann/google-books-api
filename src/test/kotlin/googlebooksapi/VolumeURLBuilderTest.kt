@@ -69,7 +69,7 @@ internal class VolumeURLBuilderTest {
 
     @Test
     fun testGetSpecificVolume() {
-        val actual = volumeRequestBuilder.getSpecificVolume("ID")
+        val actual = volumeRequestBuilder.getVolumeWithID("ID")
         val expected =
             "https://www.googleapis.com/books/v1/volumes/ID?key=$APIKEY"
         assertEquals(expected, actual)

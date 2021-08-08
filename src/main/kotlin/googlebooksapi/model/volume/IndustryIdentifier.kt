@@ -1,4 +1,4 @@
-package googlebooksapi.data.volume
+package googlebooksapi.model.volume
 
 data class IndustryIdentifier(
     val type: String,

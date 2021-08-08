@@ -1,6 +1,7 @@
 package googlebooksapi
 
-import googlebooksapi.exceptions.InvalidUserIdException
+import googlebooksapi.exception.InvalidUserIdException
+import googlebooksapi.util.StringUtils
 
 class BookshelfURLBuilder(private var key: String = StringUtils.EMPTY_STRING) : URLBuilder() {
     private val url: String
@@ -16,7 +17,7 @@ class BookshelfURLBuilder(private var key: String = StringUtils.EMPTY_STRING) : 
         return "$url/$userID/bookshelves?key=$key"
     }
 
-    fun getSpecificBookshelf(userID: String, bookshelfID: String): String {
+    fun getBookshelfWithID(userID: String, bookshelfID: String): String {
         return "$url/$userID/bookshelves/$bookshelfID?key=$key"
     }
 

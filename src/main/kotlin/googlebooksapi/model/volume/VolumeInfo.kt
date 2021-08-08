@@ -1,4 +1,4 @@
-package googlebooksapi.data.volume
+package googlebooksapi.model.volume
 
 import java.net.URI
 
