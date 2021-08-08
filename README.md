@@ -4,12 +4,14 @@ A wrapper of the [Google Books APIs](https://developers.google.com/books) writte
 ## Usage
 
 ### Volumes
+```kotlin 
+val volumeHelper = VolumeHelper("API_KEY")
+```
 
-#### Get volumes
+###### Get volumes
 
 ``` kotlin
-val volumeHelper = VolumeHelper("API_KEY")
-volumeHelper.apply {
+val request = VolumeRequest().apply {
     inauthor("Michael Pollan")
     inpublisher("Penguin")
     intitle("This Is Your Mind On Plants")
@@ -18,46 +20,40 @@ volumeHelper.apply {
     projection(ProjectionOption.FULL)
     maxResults(3)
 }
-val volume = volumeHelper.get()
+val volume: Volume = volumeHelper.get(request)
 ```
 
-#### Get specific volume
+###### Get specific volume
 
 ``` kotlin
-val volumeHelper = VolumeHelper("API_KEY")
-val volume = volumeHelper.getSpecific("wVyWswEACAAJ")
+val volumeItem: VolumeItem = volumeHelper.getVolumeWithID("wVyWswEACAAJ")
 ```
 
 ### Bookshelves
 
-#### Get bookshelves
+```kotlin
+val bookshelfHelper = BookshelfHelper("API_KEY")
+```
+
+###### Get bookshelves
 
 ``` kotlin
-val bookshelfHelper = BookshelfHelper("API_KEY")
-bookshelfHelper.userID("1164450273332089480971")
-
-val bookshelves = bookshelfHelper.get()
+val bookshelves: Bookshelf = bookshelfHelper.get("1112223334445556677")
 ```
 
-#### Get specific bookshelf
+###### Get specific bookshelf
 
 ```kotlin
-val bookshelfHelper = BookshelfHelper("API_KEY")
-bookshelfHelper.userID("1164450273332089480971")
-
-val bookshelf = bookshelfHelper.getSpecific(3)
+val bookshelf: BookshelfItem = bookshelfHelper.getBookshelfWithID("1112223334445556677", 1001)
 ```
 
-#### Get volumes in bookshelf
+###### Get volumes in bookshelf
 
 ```kotlin
-val bookshelfHelper = BookshelfHelper("API_KEY")
-bookshelfHelper.userID("1164450273332089480971")
-
-val volumes = bookshelfHelper.getVolumesInBookshelf(3)
+val item: Volume = bookshelfHelper.getVolumesInBookshelf("1164450273332089480971", 1001)
 ```
 
-## Install
+## Download
 
 ### Groovy
 ```gradle
