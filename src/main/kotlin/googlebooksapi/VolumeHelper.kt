@@ -2,6 +2,7 @@ package googlebooksapi
 
 import googlebooksapi.model.volume.VolumeItem
 import googlebooksapi.model.volume.Volume
+import googlebooksapi.options.ProjectionOption
 
 class VolumeHelper(apikey: String) {
     private val urlBuilder: VolumeURLBuilder
@@ -10,17 +11,16 @@ class VolumeHelper(apikey: String) {
         urlBuilder = VolumeURLBuilder(apikey)
     }
 
-    suspend fun get(request: VolumeRequest): Volume {
-        val search = VolumeSearch(request.searchText, request.fields, request.parameters)
-        val url = urlBuilder.getVolumes(search)
+    suspend fun get(request: VolumeGetRequest): Volume {
+        val url = urlBuilder.getVolumes(request.query, request.parameters)
         val client = VolumeClient()
         val volume: Volume = client.getVolumes(url)
 
         return volume
     }
 
-    suspend fun getVolumeWithID(volumeID: String): VolumeItem {
-        val url = urlBuilder.getVolumeWithID(volumeID)
+    suspend fun getVolumeWithID(request: VolumeGetIDRequest): VolumeItem {
+        val url = urlBuilder.getVolumeWithID(request.volumeID, request.projectionOption)
         val client = VolumeClient()
         val volumeItem: VolumeItem = client.getVolumeItem(url)
 

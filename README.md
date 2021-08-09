@@ -10,23 +10,32 @@ val volumeHelper = VolumeHelper("API_KEY")
 
 ###### Get volumes
 
-``` kotlin
-val request = VolumeRequest().apply {
-    inauthor("Michael Pollan")
+```kotlin
+val request = VolumeGetRequest().apply {
+    search("Plants")
+    intitle("This is your mind on plants")
     inpublisher("Penguin")
-    intitle("This Is Your Mind On Plants")
-    sorting(SortOption.NEWEST)
+    inauthor("Michael Pollan")
+    langRestrict("en")
+    maxResults(1)
+    orderBy(SortOption.NEWEST)
     printType(PrintTypeOption.BOOKS)
-    projection(ProjectionOption.FULL)
-    maxResults(3)
+    projection(ProjectionOption.LITE)
+    startIndex(0)
 }
-val volume: Volume = volumeHelper.get(request)
+
+val volumes: Volume = volumeHelper.get(request)
 ```
 
 ###### Get specific volume
 
-``` kotlin
-val volumeItem: VolumeItem = volumeHelper.getVolumeWithID("wVyWswEACAAJ")
+```kotlin
+val request = VolumeGetIDRequest().apply {
+    volumeID("zKkdEAAAQBAJ")
+    projection(ProjectionOption.LITE)
+}
+
+val volume: VolumeItem = volumeHelper.getVolumeWithID(request)
 ```
 
 ### Bookshelves
@@ -37,20 +46,39 @@ val bookshelfHelper = BookshelfHelper("API_KEY")
 
 ###### Get bookshelves
 
-``` kotlin
-val bookshelves: Bookshelf = bookshelfHelper.get("1112223334445556677")
+```kotlin
+val request = BookshelfGetRequest().apply {
+    userID("116445025672089480971")
+    maxResults(1)
+    startIndex(0)
+}
+
+val bookshelf: Bookshelf = bookshelfHelper.get(request)
 ```
 
 ###### Get specific bookshelf
 
 ```kotlin
-val bookshelf: BookshelfItem = bookshelfHelper.getBookshelfWithID("1112223334445556677", 1001)
+val request = BookshelfGetIDRequest().apply {
+    userID("116445025672089480971")
+    bookshelfID(1001)
+}
+
+val item: BookshelfItem = bookshelfHelper.getBookshelfWithID(request)
 ```
 
 ###### Get volumes in bookshelf
 
 ```kotlin
-val item: Volume = bookshelfHelper.getVolumesInBookshelf("1164450273332089480971", 1001)
+val request = BookshelfGetVolumesRequest().apply {
+    userID("116445025672089480971")
+    bookshelfID(1001)
+    maxResults(5)
+    startIndex(0)
+    projection(ProjectionOption.LITE)
+}
+
+val volumes: Volume = bookshelfHelper.getVolumesInBookshelf(request)
 ```
 
 ## Download
