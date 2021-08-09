@@ -1,4 +1,6 @@
 # googlebooksapi
+[![](https://jitpack.io/v/MatthiasReumann/googlebooksapi.svg)](https://jitpack.io/#MatthiasReumann/googlebooksapi)
+
 A wrapper of the [Google Books APIs](https://developers.google.com/books) written in Kotlin
 
 ## Usage
